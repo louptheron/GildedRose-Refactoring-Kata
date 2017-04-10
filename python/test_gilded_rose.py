@@ -156,7 +156,34 @@ class GildedRoseTest(unittest.TestCase):
         # Then
         self.assertEquals(expected_quality, items[0].quality)
     
-    
+    def test_conjured_degrade_twice_in_quality_from_two_when_sellin_is_positive(self):
+        # Given
+        quality = 5
+        expected_quality = 3
+        sell_in = 4
+        items = [Item("Conjured", sell_in, quality)]
+        gilded_rose = GildedRose(items)
+
+        # When
+        gilded_rose.update_quality()
+
+        # Then
+        self.assertEquals(expected_quality, items[0].quality)
+
+    def test_conjured_degrade_twice_in_quality_from_4_when_sellin_is_negative(self):
+        # Given
+        quality = 5
+        expected_quality = 1
+        sell_in = -1
+        items = [Item("Conjured", sell_in, quality)]
+        gilded_rose = GildedRose(items)
+
+        # When
+        gilded_rose.update_quality()
+
+        # Then
+        self.assertEquals(expected_quality, items[0].quality)
+
 
 if __name__ == '__main__':
     unittest.main()
